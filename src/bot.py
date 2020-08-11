@@ -177,12 +177,8 @@ class Sneaker:
         self.day = day
         self.time = time
 
-# today = int(datetime.now().strftime("%d"))
-# current_time = float(datetime.now().strftime("%H.%M"))
-# r_day = today if current_time < 10.0 else today + 1
 
-class Bot:
-    
+class Bot:    
     def __init__(self,link, size = '11',release_day = None):
         self.link = link
         self.size = size 
@@ -196,8 +192,7 @@ class Bot:
         self.driver.get(link)
         sleep(2)
         self.login()
-        sleep(3)
-        
+        sleep(3)        
         self.countdown()
         
 

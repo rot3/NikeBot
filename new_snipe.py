@@ -1,1 +1,0 @@
-PRICE_CLASS = "//div[@class = 'ncss-brand pb6-sm fs14-sm fs16-md']"
