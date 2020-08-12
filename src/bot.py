@@ -20,6 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 twilio_num = ""
 with open('secrets.txt','r') as file:
     EMAIL = file.readline().rstrip('\n')
+    PASSWORD = file.readline().rstrip('\n')
     HASHED_PASSWORD = file.readline().rstrip('\n')
     FIRST_NAME = file.readline().rstrip('\n')
     LAST_NAME = file.readline().rstrip('\n')
@@ -29,7 +30,7 @@ with open('secrets.txt','r') as file:
     STATE = file.readline().rstrip('\n')
     ZIP_CODE = file.readline().rstrip('\n')
 
-PASSWORD = 'xAj0$JLoNki#32'
+
 
 
 
