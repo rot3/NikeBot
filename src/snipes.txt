@@ -1,0 +1,6 @@
+Product(size='11
+',launch_time=LaunchTime(day='8
+',month='19
+',time='10:00
+',year='2020
+'),link='https://www.nike.com/launch/t/ajnt-23-black',name='None')

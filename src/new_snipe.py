@@ -15,7 +15,7 @@ def insert_snipe(name,color, price, time, sku):
         database = "nikebot"
     )
     my_cursor = mydb.cursor()
-    query = "INSERT INTO active_snipes (name, color_way, price,realease_time,SKU"
+    query = "INSERT INTO active_snipes (name, color_way, price,realease_time,SKU)"
     val = (name, color, price, time , sku)
     my_cursor.execute(query,val)
     mydb.commit()
@@ -59,6 +59,20 @@ class Snipe:
         self.day = day
         self.month = month
 
-get_snipe_data()
+def test():
+    mydb = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password= 'bd79Bluesql!',
+        database = "nikebot"
+    )
+    my_cursor = mydb.cursor()
+    query = "INSERT INTO active_snipes (name, color_way, price,realease_time,SKU)"
+    val = ('test', 'test', 'test', '2020-08-19 10:00:00' , 'testtest12')
+    my_cursor.execute(query,val)
+    mydb.commit()
+    print(mycursor.rowcount)
 
+#get_snipe_data()
+test()
 #print(get_datetime('AVAILABLE 8/19 AT 10:00 AM'))
