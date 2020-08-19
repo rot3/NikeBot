@@ -5,15 +5,15 @@ from selenium.webdriver.chrome.options import Options
 
 from time import sleep
 from datetime import datetime
-from pass_hash import hash_password
 import hashlib, os, pause
 
+from product import Product,LaunchTime
 
 CHROME_DRIVER_PATH = 'C:\Webdrive\chromedriver'
 
 with open('mydata\\secrets.txt','r') as file:
-    EMAIL = file.readline().rstrip('\n')
-    PASSWORD = file.readline().rstrip('\n')
+    MY_EMAIL = file.readline().rstrip('\n')
+    MY_PASSWORD = file.readline().rstrip('\n')
     HASHED_PASSWORD = file.readline().rstrip('\n')
     FIRST_NAME = file.readline().rstrip('\n')
     LAST_NAME = file.readline().rstrip('\n')
@@ -23,32 +23,42 @@ with open('mydata\\secrets.txt','r') as file:
     STATE = file.readline().rstrip('\n')
     ZIP_CODE = file.readline().rstrip('\n')
 
+with open('mydata\\apa.txt','r') as file:
+    APA_EMAIL = file.readline().rstrip('\n')
+    APA_PASSWORD = file.readline().rstrip('\n')
 
 class Bot:    
-    def __init__(self,link, size = 11,release_day = None):
-        self.link = link
-        self.size = size 
-        self.release_day = release_day
-
-        #self.set_up()
+    def __init__(self,product,email=MY_EMAIL,password=MY_PASSWORD):
+        self.product = product
+        self.email = email
+        self.password = password
+        self.set_up()
+        self.size = product.size
         options = Options()
         #options.headless = True
         self.driver = webdriver.Chrome(CHROME_DRIVER_PATH, options = options)
-        self.driver.get(link)
+        self.driver.get(product.link)
         sleep(1)
         self.login()
         sleep(2)        
-        #self.countdown()
+        self.countdown()
         self.select_size()
-        sleep(100)
+        sleep(1000)
         
     
     def set_up(self):
-        release_time = '10:00 AM'
-        pause.until(datetime(2020,8,13,9,55))
+        release_time = self.product.launch_time.get_all()
+        if release_time['min']  in range(0,5):
+            release_time['min'] += 55
+        pause.until(datetime(
+            release_time['year'],
+            release_time['mon'],
+            release_time['day'],
+            (release_time['hr']-1),
+            (release_time['min'])-5))
     
     def countdown(self):
-        pause.until(datetime(2020,8,13,9,59,58))
+        pause.until(datetime(2020,8,17,9,59,58))
         self.driver.refresh()
 
     def login(self):
@@ -70,17 +80,17 @@ class Bot:
             except NoSuchElementException:
                 sleep(.2)
 
-        email_input.send_keys(EMAIL)
+        email_input.send_keys(self.email)
         PASSWORD_XPATH = "//input[@type = 'password']"
         password_input = self.driver.find_element_by_xpath(PASSWORD_XPATH)
-        password_input.send_keys(PASSWORD)
+        password_input.send_keys(self.password)
         sleep(2)
         self.driver.find_element_by_xpath("//input[@value = 'SIGN IN']").click()
         sleep(1)
         while(True):
             try:
                 self.driver.find_element_by_xpath("//input[@value = 'Dismiss this error']").click()
-                self.driver.find_element_by_xpath(PASSWORD_XPATH).send_keys(PASSWORD )
+                self.driver.find_element_by_xpath(PASSWORD_XPATH).send_keys(self.password )
                 self.driver.find_element_by_xpath("//input[@value = 'SIGN IN']").click()
             
             except NoSuchElementException:
@@ -106,21 +116,35 @@ class Bot:
         while(True):
             try:
                 x = self.driver.find_element_by_xpath("//input[@data-shortname='cvv']")
+                x.click()
                 x.send_keys('415')
                 break
             except NoSuchElementException:
                 print('looking')
                 sleep(.5)
-        self.driver.find_element_by_xpath("//button[@data-qa = 'save-button']").click()
 
+        save = self.driver.find_elements_by_xpath("//button[@data-qa = 'save-button']").click()
+        for i in range (0,len(save)):
+            try:
+                save[i].click()
+            except NoSuchElementException:
+                continue
+            except ElementNotInteractableException:
+                continue
+
+    def buy_(self):
+        buy_now_x = ''
+        self.driver.find_element_by_xpath(buy_now_x)
     def get_ship_path(self,path):
         shipping_paths = "//input[@id = '"+ path +"']"    
     
 
 
-
-Bot('https://www.nike.com/launch/t/adapt-bb-2-0-tie-dye',size = )
-    
+# size = input("Size: ")
+# email = input('Account: ')
+blk_jrdn = Product(size = 11,launch_time=LaunchTime(19,8),link = 'https://www.nike.com/launch/t/ajnt-23-black')
+Bot(blk_jrdn)
+Bot('https://www.nike.com/launch/t/ajnt-23-black',size = 10.5,email=APA_EMAIL,password=APA_PASSWORD)
 #NikeBot(url,13)
 #
 # //button[text() = 'Go to Checkout']|

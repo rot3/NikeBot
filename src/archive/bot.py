@@ -5,7 +5,7 @@ from selenium.webdriver.chrome.options import Options
 
 from time import sleep
 from datetime import datetime
-from pass_hash import hash_password
+
 import hashlib, os
 import pause
 
@@ -265,6 +265,7 @@ class Bot:
         while(True):
             try:
                 x = self.driver.find_element_by_xpath("//input[@data-shortname='cvv']")
+                x.click()
                 x.send_keys('415')
                 break
             except NoSuchElementException:
@@ -304,7 +305,7 @@ class Bot:
 
 
 
-Bot('https://www.nike.com/launch/t/adapt-bb-2-0-tie-dye',size = )
+Bot('https://www.nike.com/launch/t/ajnt-23-black',size = 11)
     
 #NikeBot(url,13)
 #

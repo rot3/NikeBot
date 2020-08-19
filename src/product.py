@@ -4,17 +4,25 @@ class LaunchTime:
         self.day = day
         self.month = month     
         self.year = year
-
+    def get_all(self):
+        time_dict = {
+            'day':self.get_day(),
+            'mon':self.get_month(),
+            'year': self.get_year(),
+            'hr': self.get_hour(),
+            'min':self.get_minute()           
+        }
+        return time_dict
     def get_day(self):
-        return float(self.day)
+        return int(self.day)
     def get_month(self):
-        return float(self.month)
+        return int(self.month)
     def get_year(self):
-        return float(year)
+        return int(self.year)
     def get_hour(self):
-        return float(self.time[0:self.time.index(":")])
+        return int(self.time[0:self.time.index(":")])
     def get_minute(self):
-        return float(self.time[self.time.index(":")+1 : ])
+        return int(self.time[self.time.index(":")+1 : ])
 
     def compare_to(self,other):
         if(self.get_year() > other.get_year()):
@@ -70,3 +78,8 @@ class Product:
     
     def __repr__(self):
         return 'Product(size=\'%s\',launch_time=%s,link=\'%s\',name=\'%s\')' % (self.size,repr(self.launch_time),self.link,self.name)
+
+def get_mi(time):
+    return int(time[time.index(":")+1 : ])
+
+print(get_mi('10:00'))
