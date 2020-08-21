@@ -1,6 +1,3 @@
-Product(size='11
-',launch_time=LaunchTime(day='8
-',month='19
-',time='10:00
-',year='2020
-'),link='https://www.nike.com/launch/t/ajnt-23-black',name='None')
+Product(size='10.5',launch_time=LaunchTime(day='21',month='8',time='10:00',year='2020'),link='https://www.nike.com/launch/t/air-jordan-3-laser-orange',name='Laser Orange')
+Product(size='12.0',launch_time=LaunchTime(day='21',month='8',time='10:00',year='2020'),link='https://www.nike.com/launch/t/air-jordan-3-laser-orange',name='Laser Orange')
+Product(size='12.0',launch_time=LaunchTime(day='21',month='8',time='10:00',year='2020'),link='https://www.nike.com/launch/t/dunk-low-samba',name='Samba')

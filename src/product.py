@@ -78,8 +78,3 @@ class Product:
     
     def __repr__(self):
         return 'Product(size=\'%s\',launch_time=%s,link=\'%s\',name=\'%s\')' % (self.size,repr(self.launch_time),self.link,self.name)
-
-def get_mi(time):
-    return int(time[time.index(":")+1 : ])
-
-print(get_mi('10:00'))
