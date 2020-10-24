@@ -1,7 +1,7 @@
 from mydata.pass_hash import hash_str
 from product import Product
 from add_product import get_products
-from accounts import get_acc_dict
+from mydata.accounts import get_acc_dict
 from getpass import getpass
 from bot import Bot
 
