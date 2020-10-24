@@ -39,10 +39,9 @@ def load_accounts():
 def get_acc_dict():
     with open('mydata\\accounts.txt','r') as file:
         acc_dict = eval(file.read())
-    #print(acc_dict)
     return acc_dict
-        #print(acc_dict['shahir13579@gmail.com'])
-#347
+
+
 def purge_accs():
     with open('mydata\\accounts.csv','w+') as file:
         file.write('email,salt,pass,cvv')
@@ -65,4 +64,3 @@ if(__name__ =="__main__"):
         except KeyError:
             continue
 
-#add_account()
