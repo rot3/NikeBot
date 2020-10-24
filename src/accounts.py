@@ -1,5 +1,5 @@
 from getpass import getpass
-from pass_hash import get_random_salt, hash_str
+from mydata.pass_hash import get_random_salt, hash_str
 import csv
 from selenium import webdriver
 
@@ -29,11 +29,7 @@ def load_accounts():
     with open('mydata\\accounts.csv', newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            salt = row['salt']
-            email = row['email']
-            password = row['pass']
-            cvv = row['cvv']
-            accs[email] = [salt,password,cvv]
+            accs[row['email']] = [row['salt'],row['pass'],row['cvv']]
 
     with open('mydata\\accounts.txt','w+') as file:
         file.write(str(accs))
@@ -64,6 +60,9 @@ if(__name__ =="__main__"):
         action = input('Select Option Number\n1) Add Account\n2) Load Accounts(CSV)\n3) Get Accounts\n4) Purge Accounts\n5) Exit\n')
         if(action == '5'):
             break
-        x = actions[action]()
+        try:
+            x = actions[action]()
+        except KeyError:
+            continue
 
 #add_account()
