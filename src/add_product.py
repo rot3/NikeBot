@@ -3,7 +3,7 @@ from product import Product
 import csv
 import datetime
 
-valid_sizes =  list(map(str,[i*.5 for i in range(14,31)]))
+valid_sizes =  list(map(str,[i*.5 for i in range(5,31)]))
 valid_sizes.extend(['XS','S','M','L','XL','2XL'])
 valid_link = 'nike.com'
 valid_day = list(map(str,[i for i in range(1,32)]))
